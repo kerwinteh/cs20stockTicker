@@ -6,7 +6,6 @@ var http = require('http');
 var port = process.env.PORT || 3000;
 var fs = require('fs');
 
-// console.log("This goes to the console window");
 
 http.createServer(function (req, res) {
     if(req.url === "/process") {
