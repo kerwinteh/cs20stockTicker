@@ -20,5 +20,4 @@ http.createServer(function (req, res) {
         var myReadStream = fs.createReadStream(__dirname + '/index.html', "utf8");
         myReadStream.pipe(res);
     }
-
 }).listen(port);
