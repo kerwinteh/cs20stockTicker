@@ -54,7 +54,7 @@ http.createServer(async function (req, res) {
 
     if (req.url === "/process") {
         //connect to mongo
-        await client.connect();
+        // await client.connect();
         file = 'data.html';
         //read in result.html file
         fs.readFile(file, async function (err, data) {
