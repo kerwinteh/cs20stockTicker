@@ -15,7 +15,8 @@
   "bugs": {
     "url": ""
   },
-  "homepage": ""
+  "homepage": "",
+  "dependencies": {
+    "mongoose": "^7.0.5"
+  }
 }
-
-

@@ -1,14 +1,19 @@
-// const {MongoClient} = require("mongodb");
-// const uri = "mongodb+srv://kerwinteh:SYQ12nBg1QZKjs1F@cluster0.wfkcgkb.mongodb.net/?retryWrites=true&w=majority";
-// const client = new MongoClient(uri);
-
+const {MongoClient} = require("mongodb");
+const uri = "mongodb+srv://kerwinteh:SYQ12nBg1QZKjs1F@cluster0.wfkcgkb.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
 var http = require('http');
 var port = process.env.PORT || 3000;
 var fs = require('fs');
 
-http.createServer(function (req, res) {
-    if(req.url === "/process") {
-        console.log("processpageeee");
+
+console.log(document.getElementsByName("name"));
+
+http.createServer(async function (req, res) {
+    if (req.url === "/process") {
+        await client.connect();
+        await client.db("stockTicker");
+        console.log("connected to server");
+
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write("THIS IS PROCESS PAGE");
         var myReadStream = fs.createReadStream(__dirname + '/data.html', "utf8");
@@ -20,9 +25,28 @@ http.createServer(function (req, res) {
         var myReadStream = fs.createReadStream(__dirname + '/index.html', "utf8");
         myReadStream.pipe(res);
     }
-
-    // res.writeHead(200, {'Content-Type': 'text/html'});
-    // res.write("THIS IS HOME PAGE");
-    // var myReadStream = fs.createReadStream(__dirname + '/index.html', "utf8");
-    // myReadStream.pipe(res);
 }).listen(port);
+
+
+
+
+
+// const mongoose = require('mongoose');
+// function mongoose_connect()
+// {
+//     const url =""; // usual connection string goes here
+//     mongoose.connect(url,{ useUnifiedTopology: true,
+//         useNewUrlParser: true, useCreateIndex:true });
+//     const db = mongoose.connection;
+//     db.on('error', console.error.bind(console, 'error:'));
+//     db.once('open', function() {
+//         console.log("success!");
+//         Books.find(function (err, mybooks) {
+//             if (err) return console.error(err);
+//             for (i=0; i<mybooks.length; i++)
+//                 console.log(mybooks[i].show());
+//             db.close();
+//         }); // end find
+//     }); //end db once
+// } //end function
+// mongoose_connect();

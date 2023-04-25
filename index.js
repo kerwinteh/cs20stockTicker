@@ -9,7 +9,6 @@ async function main() {
         await client.db("stockTicker");
         console.log("connected to server");
         await readStockData();
-
     } catch (e) {
         console.error(e);
     }
