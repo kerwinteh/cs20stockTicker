@@ -90,7 +90,7 @@ function searchDb(name, res, user){
     if(user) {
         console.log("name" + name);
         res.write(name);
-        res.write(user);
+        // res.write(user);
         // var query = { name: name };
 
         res.write("beforeee");
