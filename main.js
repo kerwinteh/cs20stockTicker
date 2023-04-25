@@ -67,12 +67,12 @@ http.createServer(async function (req, res) {
             });
             console.log("textInput:" + textinput);
 
-            req.on('end', () => {
+            req.on('end', async () => {
                 textinput = qs.parse(textinput);
                 console.log(textinput);
                 console.log("textinput['name']: " + textinput['name']);
                 console.log("textinput['user']: " + textinput['user']);
-                searchDb(textinput['name'], res, textinput['user'] === "company");
+                await searchDb(textinput['name'], res, textinput['user'] === "company");
             });
         });
     } else {
@@ -98,7 +98,8 @@ async function searchDb(name, res, user) {
     const collection = database.collection("companies");
     // await collection.insertOne({name: "Apple"});
 
-    await collection.find({}).toArray(async function(err, result) {
+    await collection.find({
+    }).toArray(async function(err, result) {
         if (err) throw err;
         console.log(result);
         result.close();
