@@ -101,6 +101,7 @@ async function searchDb(name, res, user) {
     console.log("BEFORE");
 
     await collection.find({}).toArray(async function(err, result) {
+        console.log("INSIDE");
         if (err) throw err;
         console.log(result);
         res.write(result);
