@@ -64,16 +64,16 @@ http.createServer(async function (req, res) {
             textinput = "";
             req.on('data', data => {
                 textinput += data.toString();
-                res.write(textinput);
             });
+            res.write(textinput);
 
-            // req.on('end', () => {
-            //     //parse user input
-            //     textinput = qs.parse(textinput);
-            //     //search for it in the db
-            //     search(textinput['the_name'], res, textinput['user'] === "company");
-            // });
-            res.end();
+            req.on('end', () => {
+                console.log("END");
+                //parse user input
+                // textinput = qs.parse(textinput);
+                //search for it in the db
+                // search(textinput['the_name'], res, textinput['user'] === "company");
+            });
         });
     } else {
         file = 'index.html';
