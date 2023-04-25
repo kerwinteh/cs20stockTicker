@@ -85,24 +85,24 @@ http.createServer(async function (req, res) {
     }
 }).listen(port);
 
-async function searchDb(name, res, user) {
+async function searchDb(input, res, user) {
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
     console.log("BEFORE");
 
     if (user === "company") {
-        let result = await collection.find({name: name}).toArray();
+        let result = await collection.find({name: input}).toArray();
         res.write(JSON.stringify(result));
         console.log(result);
     } else {
-        let result = await collection.find({ticker: name}).toArray();
+        let result = await collection.find({ticker: input}).toArray();
         res.write(JSON.stringify(result));
         console.log(result);
     }
     console.log("afterfind");
 
 
-    
+
     // collection.findOne({}, function (err,result){
     //     if (err) throw err;
     //     res.write(result);
