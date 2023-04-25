@@ -96,9 +96,9 @@ async function searchDb(name, res, user) {
 
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
-    await collection.insertOne({name: "Apple"});
+    // await collection.insertOne({name: "Apple"});
 
-    await collection.find({name: "Apple"}).toArray(function(err, result) {
+    await collection.find({}).toArray(async function(err, result) {
         if (err) throw err;
         console.log(result);
         result.close();
