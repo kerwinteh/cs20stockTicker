@@ -84,14 +84,14 @@ http.createServer(async function (req, res) {
     }
 }).listen(port);
 
-function searchDb(name, res, user){
+async function searchDb(name, res, user) {
     const database = client.db("stockTicker");
     var testColl = database.collection('companies');
-    testColl.insertOne({ foo: 'bar' });
+    await testColl.insertOne({foo: 'bar'});
 
-    testColl.find({foo: 'bar'}).toArray(function (err, docs) {
-        if(docs==null) res.write("NULL");
-        if(docs!= null) res.write ("NOT NULL");
+    await testColl.find({foo: 'bar'}).toArray(function (err, docs) {
+        if (docs == null) res.write("NULL");
+        if (docs != null) res.write("NOT NULL");
         else res.write("docs" + docs);
     });
 
@@ -123,12 +123,12 @@ function searchDb(name, res, user){
     //     });
 
 
-        // collection.findOne({}, function (err, result){
-        //     if (err) throw err;
-        //     res.write(result);
-        //     console.log(result);
-        //     res.write("inside");
-        // })
+    // collection.findOne({}, function (err, result){
+    //     if (err) throw err;
+    //     res.write(result);
+    //     console.log(result);
+    //     res.write("inside");
+    // })
 
     //     res.write("aftersecond");
     // }
