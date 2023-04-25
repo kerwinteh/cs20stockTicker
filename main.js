@@ -86,12 +86,13 @@ function searchDb(name, res, user){
     const db = client.db("stockTicker");
     const collection = db.collection("companies");
     if(user === "company") {
+        console.log("name" + name);
         let query = { name: name }
-        collection.find(query).toArray(function (err, result){
+        collection.find(query).toArray(async function (err, result) {
             if (err) throw err;
             console.log(result);
             res.write(result);
-            client.close();
+            await client.close();
         });
     }
 
