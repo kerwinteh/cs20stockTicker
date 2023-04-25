@@ -100,6 +100,7 @@ async function searchDb(input, res, user) {
         console.log(result);
     }
     console.log("afterfind");
+    res.end();
 
 
 
