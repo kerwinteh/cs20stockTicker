@@ -63,9 +63,10 @@ http.createServer(async function (req, res) {
             //get user input
             let textinput = "";
             req.on('data', data => {
+                console.log(data);
                 textinput += data.toString();
             });
-            res.write(textinput);
+            console.log("textInput:" + textinput);
 
             req.on('end', () => {
                 console.log("END");
