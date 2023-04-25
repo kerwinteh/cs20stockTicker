@@ -90,7 +90,7 @@ function searchDb(name, res, user){
     collection.findOne({}, function (err,result){
         if (err) throw err;
         res.write(result);
-    })
+    });
     // if(user) {
     //     console.log("name" + name);
     //     res.write(name);
@@ -113,10 +113,6 @@ function searchDb(name, res, user){
     //     });
 
 
-
-
-    
-
         // collection.findOne({}, function (err, result){
         //     if (err) throw err;
         //     res.write(result);
@@ -124,8 +120,8 @@ function searchDb(name, res, user){
         //     res.write("inside");
         // })
 
-        res.write("aftersecond");
-    }
+    //     res.write("aftersecond");
+    // }
 }
 
 async function connect() {
