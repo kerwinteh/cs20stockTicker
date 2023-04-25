@@ -72,7 +72,7 @@ http.createServer(async function (req, res) {
                 console.log(textinput);
                 console.log("textinput['name']: " + textinput['name']);
                 console.log("textinput['user']: " + textinput['user']);
-                searchDb(textinput['name'], res, textinput['user']);
+                searchDb(textinput['name'], res, textinput['user'] === "company");
             });
         });
     } else {
@@ -95,20 +95,25 @@ function searchDb(name, res, user){
 
         res.write("beforeee");
 
-        // collection.find({name: name}).toArray(async function (err, result) {
-        //     if (err) throw err;
-        //     console.log(result);
-        //     res.write("resuilt" + result);
-        //     res.write("inside");
-        //     await client.close();
-        // });
-
-        collection.findOne({}, function (err, result){
+        collection.find(user ? {"name": name} : {"ticker": name + "\r"}).toArray(async function (err, result) {
             if (err) throw err;
-            res.write(result);
             console.log(result);
+
+            if (result.length === 0) {
+                res.write("No results for: " + name)
+            }
+
+            res.write("resuilt" + result);
             res.write("inside");
-        })
+            await client.close();
+        });
+
+        // collection.findOne({}, function (err, result){
+        //     if (err) throw err;
+        //     res.write(result);
+        //     console.log(result);
+        //     res.write("inside");
+        // })
 
         res.write("aftersecond");
     }
