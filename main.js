@@ -83,22 +83,22 @@ http.createServer(async function (req, res) {
 }).listen(port);
 
 function searchDb(name, res, user){
-    const db = client.db("stockTicker");
-    const collection = db.collection("companies");
+    const database = client.db("stockTicker");
+    const collection = database.collection("companies");
     if(user === "company") {
         console.log("name" + name);
         res.write(name);
         res.write(user);
         let query = { name: name }
+        res.write("beforeee");
         collection.find(query).toArray(async function (err, result) {
-            if (err) {
-                throw err;
-                res.write("ERORR");
-            }
+            if (err) throw err;
             // console.log(result);
             res.write("resuilt" + result);
+            res.write("inside");
             await client.close();
         });
+        res.write("after");
     }
 
    /* collection.find(comp ? {"name": query} : {"ticker": query + "\r"}).toArray(async function (err, result) {
