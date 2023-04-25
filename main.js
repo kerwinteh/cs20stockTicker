@@ -68,7 +68,6 @@ http.createServer(async function (req, res) {
             console.log("textInput:" + textinput);
 
             req.on('end', () => {
-                console.log("END");
                 textinput = qs.parse(textinput);
                 console.log(textinput);
                 searchDb(textinput['name'], res, textinput['user']);
@@ -84,7 +83,38 @@ http.createServer(async function (req, res) {
 }).listen(port);
 
 function searchDb(name, res, user){
+    const db = client.db("stockTicker");
+    const collection = db.collection("companies");
+    if(user === "company") {
+        let query = { name: name }
+        collection.find(query).toArray(function (err, result){
+            if (err) throw err;
+            console.log(result);
+            client.close();
+        });
+    }
 
+    collection.find(comp ? {"name": query} : {"ticker": query + "\r"}).toArray(async function (err, result) {
+        if (err) throw err;
+
+        console.log(result)
+
+        //if no results tell the user they are stupid
+        if (result.length === 0) {
+            res.write("No results for: " + query)
+        }
+
+        //close the connection
+        await client.close();
+        //add the data to the page
+        for (let i = 0; i < result.length; i++) {
+            res.write("Name: " + result[i].name);
+            res.write("-----Ticker: " + result[i].ticker);
+            res.write("<br>")
+        }
+        //finish making the page
+        res.end();
+    });
 }
 
 async function connect() {
