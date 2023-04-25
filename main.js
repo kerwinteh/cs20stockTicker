@@ -59,7 +59,7 @@ http.createServer(async function (req, res) {
         //read in result.html file
         fs.readFile(file, async function (err, data) {
             res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write(txt);
+            res.write(data);
             //get user input
             // pdata = "";
             // req.on('data', data => {
@@ -78,7 +78,7 @@ http.createServer(async function (req, res) {
         //read in index.html file
         fs.readFile(file, function (err, data) {
             res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write(txt);
+            res.write(data);
             res.end();
         });
     }
