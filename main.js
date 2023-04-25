@@ -7,11 +7,21 @@ var fs = require('fs');
 
 
 http.createServer(async function (req, res) {
-    fs.readFile('index.html',function (err, data){
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-        res.end();
-    });
+    if (req.url === "/process") {
+        fs.readFile('data.html',function (err, data){
+            res.write("THIS IS PROCESS PAGE");
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.write("data" + data);
+            res.end();
+        });
+    } else {
+        fs.readFile('index.html',function (err, data){
+            res.write("index.html fillee");
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.write("data" + data);
+            res.end();
+        });
+    }
 
 
 
