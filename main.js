@@ -107,9 +107,10 @@ function searchDb(name, res, user){
             if (err) throw err;
             res.write(result);
             console.log(result);
+            res.write("inside");
         })
 
-        res.write("after");
+        res.write("aftersecond");
     }
 
    /* collection.find(comp ? {"name": query} : {"ticker": query + "\r"}).toArray(async function (err, result) {
