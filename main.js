@@ -93,10 +93,10 @@ function searchDb(name, res, user){
         collection.find(query).toArray(async function (err, result) {
             if (err) {
                 throw err;
-                console.log("ERORR");
+                res.write("ERORR");
             }
-            console.log(result);
-            res.write(result);
+            // console.log(result);
+            res.write("resuilt" + result);
             await client.close();
         });
     }
