@@ -88,13 +88,15 @@ http.createServer(async function (req, res) {
 async function searchDb(input, res, user) {
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
-    console.log("BEFORE");
+    console.log("USER INPUT: " + input);
 
     if (user === "company") {
+        console.log("IN COMPANIES");
         let result = await collection.find({name: input}).toArray();
         res.write(JSON.stringify(result));
         console.log(result);
     } else {
+        console.log("IN TICKERSYMBOLSSS");
         let result = await collection.find({ticker: input}).toArray();
         res.write(JSON.stringify(result));
         console.log(result);
