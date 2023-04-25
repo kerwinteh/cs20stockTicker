@@ -61,17 +61,18 @@ http.createServer(async function (req, res) {
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.write(data);
             //get user input
-            // pdata = "";
-            // req.on('data', data => {
-            //     pdata += data.toString();
-            // });
-            //
+            mydata = "";
+            req.on('data', data => {
+                mydata += data.toString();
+            });
+
             // req.on('end', () => {
             //     //parse user input
-            //     pdata = qs.parse(pdata);
+            //     mydata = qs.parse(mydata);
             //     //search for it in the db
-            //     search(pdata['the_name'], res, pdata['user'] === "company");
+            //     search(mydata['the_name'], res, mydata['user'] === "company");
             // });
+            res.end();
         });
     } else {
         file = 'index.html';
