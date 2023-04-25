@@ -70,6 +70,8 @@ http.createServer(async function (req, res) {
             req.on('end', () => {
                 textinput = qs.parse(textinput);
                 console.log(textinput);
+                console.log("textinput['name']: " + textinput['name']);
+                console.log("textinput['user']: " + textinput['user']);
                 searchDb(textinput['name'], res, textinput['user']);
             });
         });
