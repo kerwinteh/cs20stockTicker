@@ -89,15 +89,16 @@ async function searchDb(input, res, user) {
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
     console.log("USER INPUT: " + input);
+    console.log("USER CHOICE: " + user);
 
     if (user === "company") {
         console.log("IN COMPANIES");
-        let result = await collection.find({name: input}).toArray();
+        let result = collection.find({name: input}).toArray();
         res.write(JSON.stringify(result));
         console.log(result);
     } else {
         console.log("IN TICKERSYMBOLSSS");
-        let result = await collection.find({ticker: input}).toArray();
+        let result = collection.find({ticker: input}).toArray();
         res.write(JSON.stringify(result));
         console.log(result);
     }
