@@ -72,7 +72,8 @@ http.createServer(async function (req, res) {
                 console.log(textinput);
                 console.log("textinput['name']: " + textinput['name']);
                 console.log("textinput['user']: " + textinput['user']);
-                await searchDb(textinput['name'], res, textinput['user'] === "company");
+                result = await searchDb(textinput['name'], res, textinput['user'] === "company");
+                console.log("the reuslt: " + result);
                 console.log("ELORE");
             });
         });
@@ -100,13 +101,16 @@ async function searchDb(name, res, user) {
     await collection.insertOne({name: "apple"});
     console.log("BEFORE");
 
-    await database.collection("companies").find({}).toArray(function (err, result) {
-        console.log("INSIDE");
-        if (err) throw err;
-        console.log(result);
-        res.write(result);
-        result.close();
-    });
+    // await collection.find({}).toArray(function (err, result) {
+    //     console.log("INSIDE");
+    //     if (err) throw err;
+    //     console.log(result);
+    //     res.write(result);
+    //     result.close();
+    // });
+
+    return await collection.find({}).toArray();
+
 
     console.log("afterfind");
     // collection.findOne({}, function (err,result){
