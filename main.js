@@ -88,8 +88,8 @@ function searchDb(name, res, user){
     const database = client.db("stockTicker");
     var testColl = database.collection('companies');
     testColl.insertOne({ foo: 'bar' });
-    
-    testColl.find({}).toArray(function (err, docs) {
+
+    testColl.find({foo: 'bar'}).toArray(function (err, docs) {
         if(docs==null) res.write("NULL");
         if(docs!= null) res.write ("NOT NULL");
         else res.write("docs" + docs);
