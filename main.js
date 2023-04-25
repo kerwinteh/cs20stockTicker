@@ -7,7 +7,6 @@ var port = process.env.PORT || 3000;
 var fs = require('fs');
 
 http.createServer(function (req, res) {
-    console.log("heelloo");
     if(req.url === "/process") {
         console.log("processpageeee");
         res.writeHead(200, {'Content-Type': 'text/html'});
