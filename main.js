@@ -33,7 +33,7 @@ http.createServer(async function (req, res) {
 
     if (req.url === "/process") {
         await client.connect();
-        await client.db("stockTicker");
+        // await client.db("stockTicker");
         console.log("connected to server");
 
         res.writeHead(200, {'Content-Type': 'text/html'});
