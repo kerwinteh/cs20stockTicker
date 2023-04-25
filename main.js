@@ -87,26 +87,35 @@ http.createServer(async function (req, res) {
 function searchDb(name, res, user){
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
-    if(user) {
-        console.log("name" + name);
-        res.write(name);
-        // res.write(user);
-        // var query = { name: name };
+    collection.findOne({}, function (err,result){
+        if (err) throw err;
+        res.write(result);
+    })
+    // if(user) {
+    //     console.log("name" + name);
+    //     res.write(name);
+    //     // res.write(user);
+    //     // var query = { name: name };
+    //
+    //     res.write("beforeee");
+    //
+    //     collection.find(user ? {"name": name} : {"ticker": name + "\r"}).toArray(async function (err, result) {
+    //         if (err) throw err;
+    //         console.log(result);
+    //
+    //         if (result.length === 0) {
+    //             res.write("No results for: " + name)
+    //         }
+    //
+    //         res.write("resuilt" + result);
+    //         res.write("inside");
+    //         await client.close();
+    //     });
 
-        res.write("beforeee");
 
-        collection.find(user ? {"name": name} : {"ticker": name + "\r"}).toArray(async function (err, result) {
-            if (err) throw err;
-            console.log(result);
 
-            if (result.length === 0) {
-                res.write("No results for: " + name)
-            }
 
-            res.write("resuilt" + result);
-            res.write("inside");
-            await client.close();
-        });
+    
 
         // collection.findOne({}, function (err, result){
         //     if (err) throw err;
