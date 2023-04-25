@@ -86,11 +86,18 @@ http.createServer(async function (req, res) {
 
 function searchDb(name, res, user){
     const database = client.db("stockTicker");
-    const collection = database.collection("companies");
-    collection.findOne({}, function (err,result){
-        if (err) throw err;
-        res.write(result);
+    var testColl = database.collection('companies');
+    testColl.insertOne({ foo: 'bar' });
+    testColl.find({}).toArray(function (err, docs) {
+        console.log(docs);
     });
+
+    // const database = client.db("stockTicker");
+    // const collection = database.collection("companies");
+    // collection.findOne({}, function (err,result){
+    //     if (err) throw err;
+    //     res.write(result);
+    // });
     // if(user) {
     //     console.log("name" + name);
     //     res.write(name);
