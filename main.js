@@ -54,7 +54,7 @@ http.createServer(async function (req, res) {
 
     if (req.url === "/process") {
         //connect to mongo
-        // await client.connect();
+        // await connect();
         file = 'data.html';
         //read in result.html file
         fs.readFile(file, async function (err, data) {
@@ -86,6 +86,13 @@ http.createServer(async function (req, res) {
 
 
 
+async function connect() {
+    // Connect the client to the server (optional starting in v4.7)
+    await client.connect();
+    // Establish and verify connection
+    await client.db("stockTicker");
+    console.log("Connected successfully to server");
+}
 
 
 // const mongoose = require('mongoose');
