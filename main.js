@@ -85,18 +85,24 @@ http.createServer(async function (req, res) {
 }).listen(port);
 
 async function searchDb(name, res, user) {
+
+    // await testColl.insertOne({foo: 'bar'});
+    //
+    // await testColl.find({}).toArray(function (err, docs) {
+    //     if (docs == null) res.write("NULL");
+    //     if (docs != null) res.write("NOT NULL");
+    //     else res.write("docs" + docs);
+    // });
+
     const database = client.db("stockTicker");
-    var testColl = database.collection('companies');
-    await testColl.insertOne({foo: 'bar'});
+    const collection = database.collection("companies");
+    await collection.insertOne({name: "Apple"});
 
-    await testColl.find({foo: 'bar'}).toArray(function (err, docs) {
-        if (docs == null) res.write("NULL");
-        if (docs != null) res.write("NOT NULL");
-        else res.write("docs" + docs);
+    await collection.find({name: "Apple"}).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        result.close();
     });
-
-    // const database = client.db("stockTicker");
-    // const collection = database.collection("companies");
     // collection.findOne({}, function (err,result){
     //     if (err) throw err;
     //     res.write(result);
@@ -121,6 +127,7 @@ async function searchDb(name, res, user) {
     //         res.write("inside");
     //         await client.close();
     //     });
+    // }
 
 
     // collection.findOne({}, function (err, result){
