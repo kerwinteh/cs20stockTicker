@@ -97,7 +97,7 @@ async function searchDb(name, res, user) {
 
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
-    // await collection.insertOne({name: "Apple"});
+    await collection.insertOne({name: "bitch"});
     console.log("BEFORE");
 
     await collection.find({}).toArray(async function(err, result) {
@@ -105,7 +105,7 @@ async function searchDb(name, res, user) {
         if (err) throw err;
         console.log(result);
         res.write(result);
-        result.close();
+        await result.close();
     });
 
     console.log("afterfind");
