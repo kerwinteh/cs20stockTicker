@@ -102,6 +102,7 @@ async function searchDb(name, res, user) {
     }).toArray(async function(err, result) {
         if (err) throw err;
         console.log(result);
+        res.write(result);
         result.close();
     });
     // collection.findOne({}, function (err,result){
