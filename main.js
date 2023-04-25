@@ -94,7 +94,7 @@ function searchDb(name, res, user){
         });
     }
 
-    collection.find(comp ? {"name": query} : {"ticker": query + "\r"}).toArray(async function (err, result) {
+   /* collection.find(comp ? {"name": query} : {"ticker": query + "\r"}).toArray(async function (err, result) {
         if (err) throw err;
 
         console.log(result)
@@ -114,7 +114,7 @@ function searchDb(name, res, user){
         }
         //finish making the page
         res.end();
-    });
+    });*/
 }
 
 async function connect() {
