@@ -29,7 +29,7 @@ http.createServer(async function (req, res) {
     //     res.write("data" + data);
     //     res.end();
     // });
-    
+
 
     if (req.url === "/process") {
         await client.connect();
@@ -40,6 +40,9 @@ http.createServer(async function (req, res) {
         res.write("THIS IS PROCESS PAGE");
         var myReadStream = fs.createReadStream(__dirname + '/data.html', "utf8");
         myReadStream.pipe(res);
+        myReadStream.on('data', function (chunk) {
+            console.log(chunk.toString());
+        });
     } else {
         console.log("HOME PAGEEE");
         res.writeHead(200, {'Content-Type': 'text/html'});
