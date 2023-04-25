@@ -89,10 +89,10 @@ function searchDb(name, res, user){
         console.log("name" + name);
         res.write(name);
         res.write(user);
-        query = { name: name };
-        
+        // var query = { name: name };
+
         res.write("beforeee");
-        collection.find(query).toArray(async function (err, result) {
+        collection.find({name: "Harry and David"}).toArray(async function (err, result) {
             if (err) throw err;
             // console.log(result);
             res.write("resuilt" + result);
