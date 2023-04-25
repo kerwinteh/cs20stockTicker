@@ -73,6 +73,7 @@ http.createServer(async function (req, res) {
                 console.log("textinput['name']: " + textinput['name']);
                 console.log("textinput['user']: " + textinput['user']);
                 await searchDb(textinput['name'], res, textinput['user'] === "company");
+                console.log("ELORE");
             });
         });
     } else {
@@ -97,14 +98,16 @@ async function searchDb(name, res, user) {
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
     // await collection.insertOne({name: "Apple"});
+    console.log("BEFORE");
 
-    await collection.find({
-    }).toArray(async function(err, result) {
+    await collection.find({}).toArray(async function(err, result) {
         if (err) throw err;
         console.log(result);
         res.write(result);
         result.close();
     });
+
+    console.log("afterfind");
     // collection.findOne({}, function (err,result){
     //     if (err) throw err;
     //     res.write(result);
