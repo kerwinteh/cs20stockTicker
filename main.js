@@ -109,7 +109,7 @@ async function searchDb(name, res, user) {
     // });
 
     let result = await collection.find({}).toArray();
-    res.write(result);
+    res.write(JSON.stringify(result));
 
 
     console.log("afterfind");
