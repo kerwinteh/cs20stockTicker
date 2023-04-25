@@ -89,7 +89,9 @@ function searchDb(name, res, user){
     var testColl = database.collection('companies');
     testColl.insertOne({ foo: 'bar' });
     testColl.find({}).toArray(function (err, docs) {
-        res.write("docs" + docs);
+        if(docs==null) res.write("NULL");
+
+        else res.write("docs" + docs);
     });
 
     // const database = client.db("stockTicker");
