@@ -86,33 +86,23 @@ http.createServer(async function (req, res) {
 }).listen(port);
 
 async function searchDb(name, res, user) {
-
-    // await testColl.insertOne({foo: 'bar'});
-    //
-    // await testColl.find({}).toArray(function (err, docs) {
-    //     if (docs == null) res.write("NULL");
-    //     if (docs != null) res.write("NOT NULL");
-    //     else res.write("docs" + docs);
-    // });
-
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
     console.log("BEFORE");
 
-    // await collection.find({}).toArray(function (err, result) {
-    //     console.log("INSIDE");
-    //     if (err) throw err;
-    //     console.log(result);
-    //     res.write(result);
-    //     result.close();
-    // });
-
-    let result = await collection.find({}).toArray();
-    res.write(JSON.stringify(result));
-    console.log(result);
-
-
+    if (user === "company") {
+        let result = await collection.find({name: name}).toArray();
+        res.write(JSON.stringify(result));
+        console.log(result);
+    } else {
+        let result = await collection.find({ticker: name}).toArray();
+        res.write(JSON.stringify(result));
+        console.log(result);
+    }
     console.log("afterfind");
+
+
+    
     // collection.findOne({}, function (err,result){
     //     if (err) throw err;
     //     res.write(result);
