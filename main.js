@@ -4,6 +4,7 @@ const client = new MongoClient(uri);
 var http = require('http');
 var port = process.env.PORT || 3000;
 var fs = require('fs');
+var qs = require('querystring');
 
 
 http.createServer(async function (req, res) {
@@ -55,9 +56,7 @@ http.createServer(async function (req, res) {
     if (req.url === "/process") {
         //connect to mongo
         await connect();
-        file = 'data.html';
-        //read in result.html file
-        fs.readFile(file, async function (err, data) {
+        fs.readFile('data.html', async function (err, data) {
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.write(data);
             //get user input
@@ -70,16 +69,13 @@ http.createServer(async function (req, res) {
 
             req.on('end', () => {
                 console.log("END");
-                //parse user input
-                // textinput = qs.parse(textinput);
-                //search for it in the db
-                // search(textinput['the_name'], res, textinput['user'] === "company");
+                textinput = qs.parse(textinput);
+                console.log(textinput);
+                searchDb(textinput['name'], res, textinput['user']);
             });
         });
     } else {
-        file = 'index.html';
-        //read in index.html file
-        fs.readFile(file, function (err, data) {
+        fs.readFile('index.html', function (err, data) {
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.write(data);
             res.end();
@@ -87,7 +83,9 @@ http.createServer(async function (req, res) {
     }
 }).listen(port);
 
+function searchDb(name, res, user){
 
+}
 
 async function connect() {
     // Connect the client to the server (optional starting in v4.7)
