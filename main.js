@@ -23,31 +23,30 @@ http.createServer(async function (req, res) {
     //     });
     // }
 
-    fs.readFile('index.html',function (err, data){
-        res.write("index.html fillee");
+    // fs.readFile('index.html',function (err, data){
+    //     res.write("index.html fillee");
+    //     res.writeHead(200, {'Content-Type': 'text/html'});
+    //     res.write("data" + data);
+    //     res.end();
+    // });
+    
+
+    if (req.url === "/process") {
+        await client.connect();
+        await client.db("stockTicker");
+        console.log("connected to server");
+
         res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write("data" + data);
-        res.end();
-    });
-
-
-
-    // if (req.url === "/process") {
-    //     await client.connect();
-    //     await client.db("stockTicker");
-    //     console.log("connected to server");
-    //
-    //     res.writeHead(200, {'Content-Type': 'text/html'});
-    //     res.write("THIS IS PROCESS PAGE");
-    //     var myReadStream = fs.createReadStream(__dirname + '/data.html', "utf8");
-    //     myReadStream.pipe(res);
-    // } else {
-    //     console.log("HOME PAGEEE");
-    //     res.writeHead(200, {'Content-Type': 'text/html'});
-    //     res.write("HOME PAGE, PICK A STOCK");
-    //     var myReadStream = fs.createReadStream(__dirname + '/index.html', "utf8");
-    //     myReadStream.pipe(res);
-    // }
+        res.write("THIS IS PROCESS PAGE");
+        var myReadStream = fs.createReadStream(__dirname + '/data.html', "utf8");
+        myReadStream.pipe(res);
+    } else {
+        console.log("HOME PAGEEE");
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write("HOME PAGE, PICK A STOCK");
+        var myReadStream = fs.createReadStream(__dirname + '/index.html', "utf8");
+        myReadStream.pipe(res);
+    }
 }).listen(port);
 
 
