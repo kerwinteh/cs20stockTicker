@@ -90,19 +90,32 @@ async function searchDb(input, res, user) {
     const collection = database.collection("companies");
     console.log("USER INPUT: " + input);
     console.log("USER CHOICE: " + user);
-
+    let result;
     if (user === "company") {
         console.log("IN COMPANIES");
-        let result = await collection.find({name: input}).toArray();
+        result = await collection.find({name: input}).toArray();
         res.write(JSON.stringify(result));
         console.log(result);
+        if (result.length === 0) {
+            res.write("No results for: " + input);
+        }
     } else {
         console.log("IN TICKERSYMBOLSSS");
-        let result = await collection.find({ticker: input}).toArray();
+        result = await collection.find({ticker: input}).toArray();
         res.write(JSON.stringify(result));
         console.log(result);
+        if (result.length === 0) {
+            res.write("No results for: " + input);
+        }
     }
-    console.log("afterfind");
+
+    for (let i = 0; i < result.length; i++) {
+        res.write("Name: " + result[i].name);
+        res.write("-----Ticker: " + result[i].ticker);
+        res.write("<br>");
+    }
+
+    await client.close();
     res.end();
 
 
