@@ -6,8 +6,6 @@ var port = process.env.PORT || 3000;
 var fs = require('fs');
 
 
-console.log(document.getElementsByName("name"));
-
 http.createServer(async function (req, res) {
     if (req.url === "/process") {
         await client.connect();
