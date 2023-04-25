@@ -30,25 +30,57 @@ http.createServer(async function (req, res) {
     //     res.end();
     // });
 
+    //
+    // if (req.url === "/process") {
+    //     await client.connect();
+    //     // await client.db("stockTicker");
+    //     console.log("connected to server");
+    //
+    //     res.writeHead(200, {'Content-Type': 'text/html'});
+    //     res.write("THIS IS PROCESS PAGE");
+    //     var myReadStream = fs.createReadStream(__dirname + '/data.html', "utf8");
+    //     myReadStream.pipe(res);
+    //     myReadStream.on('data', function (chunk) {
+    //         console.log(chunk.toString());
+    //     });
+    // } else {
+    //     console.log("HOME PAGEEE");
+    //     res.writeHead(200, {'Content-Type': 'text/html'});
+    //     res.write("HOME PAGE, PICK A STOCK");
+    //     var myReadStream = fs.createReadStream(__dirname + '/index.html', "utf8");
+    //     myReadStream.pipe(res);
+    // }
+
 
     if (req.url === "/process") {
-        await client.connect();
-        // await client.db("stockTicker");
-        console.log("connected to server");
-
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write("THIS IS PROCESS PAGE");
-        var myReadStream = fs.createReadStream(__dirname + '/data.html', "utf8");
-        myReadStream.pipe(res);
-        myReadStream.on('data', function (chunk) {
-            console.log(chunk.toString());
+        //connect to mongo
+        await connect();
+        file = 'data.html';
+        //read in result.html file
+        fs.readFile(file, async function (err, data) {
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.write(txt);
+            //get user input
+            // pdata = "";
+            // req.on('data', data => {
+            //     pdata += data.toString();
+            // });
+            //
+            // req.on('end', () => {
+            //     //parse user input
+            //     pdata = qs.parse(pdata);
+            //     //search for it in the db
+            //     search(pdata['the_name'], res, pdata['user'] === "company");
+            // });
         });
     } else {
-        console.log("HOME PAGEEE");
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write("HOME PAGE, PICK A STOCK");
-        var myReadStream = fs.createReadStream(__dirname + '/index.html', "utf8");
-        myReadStream.pipe(res);
+        file = 'index.html';
+        //read in index.html file
+        fs.readFile(file, function (err, data) {
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.write(txt);
+            res.end();
+        });
     }
 }).listen(port);
 
