@@ -97,15 +97,15 @@ async function searchDb(name, res, user) {
 
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
-    await collection.insertOne({name: "bitch"});
+    await collection.insertOne({name: "apple"});
     console.log("BEFORE");
 
-    await collection.find({}).toArray(async function(err, result) {
+    await database.collection("companies").find({}).toArray(function (err, result) {
         console.log("INSIDE");
         if (err) throw err;
         console.log(result);
         res.write(result);
-        await result.close();
+        result.close();
     });
 
     console.log("afterfind");
