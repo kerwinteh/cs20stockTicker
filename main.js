@@ -72,8 +72,7 @@ http.createServer(async function (req, res) {
                 console.log(textinput);
                 console.log("textinput['name']: " + textinput['name']);
                 console.log("textinput['user']: " + textinput['user']);
-                result = await searchDb(textinput['name'], res, textinput['user'] === "company");
-                console.log("the reuslt: " + result);
+                await searchDb(textinput['name'], res, textinput['user'] === "company");
                 console.log("ELORE");
             });
         });
@@ -109,7 +108,8 @@ async function searchDb(name, res, user) {
     //     result.close();
     // });
 
-    return await collection.find({}).toArray();
+    let result = await collection.find({}).toArray();
+    res.write(result);
 
 
     console.log("afterfind");
