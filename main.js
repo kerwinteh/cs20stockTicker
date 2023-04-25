@@ -72,7 +72,7 @@ http.createServer(async function (req, res) {
                 console.log(textinput);
                 console.log("textinput['name']: " + textinput['name']);
                 console.log("textinput['user']: " + textinput['user']);
-                await searchDb(textinput['name'], res, textinput['user'] === "company");
+                await searchDb(textinput['name'], res, textinput['user']);
                 console.log("ELORE");
             });
         });
