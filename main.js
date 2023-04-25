@@ -94,16 +94,12 @@ async function searchDb(input, res, user) {
     if (user === "company") {
         console.log("IN COMPANIES");
         result = await collection.find({name: input}).toArray();
-        res.write(JSON.stringify(result));
-        console.log(result);
         if (result.length === 0) {
             res.write("No results for: " + input);
         }
     } else {
         console.log("IN TICKERSYMBOLSSS");
         result = await collection.find({ticker: input}).toArray();
-        res.write(JSON.stringify(result));
-        console.log(result);
         if (result.length === 0) {
             res.write("No results for: " + input);
         }
@@ -111,7 +107,9 @@ async function searchDb(input, res, user) {
 
     for (let i = 0; i < result.length; i++) {
         res.write("Name: " + result[i].name);
-        res.write("-----Ticker: " + result[i].ticker);
+        res.write("<br>");
+        res.write("Ticker: " + result[i].ticker);
+        res.write("<br>");
         res.write("<br>");
     }
 
