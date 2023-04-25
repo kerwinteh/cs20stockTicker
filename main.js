@@ -87,7 +87,7 @@ http.createServer(async function (req, res) {
 function searchDb(name, res, user){
     const database = client.db("stockTicker");
     const collection = database.collection("companies");
-    if(user === "company") {
+    if(user) {
         console.log("name" + name);
         res.write(name);
         res.write(user);
