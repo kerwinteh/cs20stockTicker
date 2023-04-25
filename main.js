@@ -117,28 +117,6 @@ function searchDb(name, res, user){
 
         res.write("aftersecond");
     }
-
-   /* collection.find(comp ? {"name": query} : {"ticker": query + "\r"}).toArray(async function (err, result) {
-        if (err) throw err;
-
-        console.log(result)
-
-        //if no results tell the user they are stupid
-        if (result.length === 0) {
-            res.write("No results for: " + query)
-        }
-
-        //close the connection
-        await client.close();
-        //add the data to the page
-        for (let i = 0; i < result.length; i++) {
-            res.write("Name: " + result[i].name);
-            res.write("-----Ticker: " + result[i].ticker);
-            res.write("<br>")
-        }
-        //finish making the page
-        res.end();
-    });*/
 }
 
 async function connect() {
