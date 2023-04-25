@@ -94,13 +94,20 @@ function searchDb(name, res, user){
         // var query = { name: name };
 
         res.write("beforeee");
-        collection.find({name: "Harry and David"}).toArray(async function (err, result) {
+
+        // collection.find({name: name}).toArray(async function (err, result) {
+        //     if (err) throw err;
+        //     console.log(result);
+        //     res.write("resuilt" + result);
+        //     res.write("inside");
+        //     await client.close();
+        // });
+
+        collection.findOne({}, function (err, result){
             if (err) throw err;
+            res.write(result);
             console.log(result);
-            res.write("resuilt" + result);
-            res.write("inside");
-            await client.close();
-        });
+        })
 
         res.write("after");
     }
