@@ -90,6 +90,7 @@ function searchDb(name, res, user){
         collection.find(query).toArray(function (err, result){
             if (err) throw err;
             console.log(result);
+            res.write(resultl);
             client.close();
         });
     }
