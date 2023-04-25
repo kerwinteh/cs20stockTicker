@@ -89,7 +89,8 @@ function searchDb(name, res, user){
         console.log("name" + name);
         res.write(name);
         res.write(user);
-        let query = { name: name }
+        query = { name: name };
+        
         res.write("beforeee");
         collection.find(query).toArray(async function (err, result) {
             if (err) throw err;
@@ -98,6 +99,7 @@ function searchDb(name, res, user){
             res.write("inside");
             await client.close();
         });
+
         res.write("after");
     }
 
