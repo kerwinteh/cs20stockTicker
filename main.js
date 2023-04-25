@@ -87,9 +87,14 @@ function searchDb(name, res, user){
     const collection = db.collection("companies");
     if(user === "company") {
         console.log("name" + name);
+        res.write(name);
+        res.write(user);
         let query = { name: name }
         collection.find(query).toArray(async function (err, result) {
-            if (err) throw err;
+            if (err) {
+                throw err;
+                console.log("ERORR");
+            }
             console.log(result);
             res.write(result);
             await client.close();
