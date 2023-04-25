@@ -96,7 +96,7 @@ function searchDb(name, res, user){
         res.write("beforeee");
         collection.find({name: "Harry and David"}).toArray(async function (err, result) {
             if (err) throw err;
-            // console.log(result);
+            console.log(result);
             res.write("resuilt" + result);
             res.write("inside");
             await client.close();
